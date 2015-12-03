@@ -9,7 +9,8 @@
 class day1
 {
     public $input;
-    public $floor;
+    public $floor = 0;
+    public $position = -1;
 
     public function __construct() {
         $this->input = file_get_contents(__DIR__ . '/input/day1.txt');
@@ -18,25 +19,29 @@ class day1
 
     // Santa starts at floor 0
     // follows instructions of input
-    public function getFloorOfSanta() {
+    public function getSantaBiz() {
         for($i = 0; $i < count($this->input); $i++)  {
 
-            // ) means  +
+            // ) means +
             if( $this->input[ $i ] === '(' ) {
                 $this->floor++;
             }
 
             // ( means -
-            if( $this->input[ $i ] === ')') {
+            if( $this->input[ $i ] === ')' ) {
                 $this->floor--;
             }
 
+            // when he enters basement -1
+            if($this->floor < 0 && $this->position < 0)
+                $this->position = $i + 1;
         }
 
-        return $this->floor;
+        echo 'Santa is at floor: ' . $this->floor . PHP_EOL;
+        echo 'Santa enters basement first time at position: ' . $this->position . PHP_EOL;
     }
 }
 
 $day1 = new day1();
-$floor = $day1->getFloorOfSanta();
-echo 'Santa is at floor: ' . $floor;
+
+$floor = $day1->getSantaBiz();
