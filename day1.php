@@ -44,4 +44,4 @@ class day1
 
 $day1 = new day1();
 
-$floor = $day1->getSantaBiz();
+$run = $day1->getSantaBiz();
